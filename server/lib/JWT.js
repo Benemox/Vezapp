@@ -10,21 +10,8 @@ const GH_SECRET = process.env.GH_SECRET;
 const SECRET_JWT = process.env.SECRET_JWT;
 
 
-const {server} = require("./express");
+
 //COMPROBACIÓN DEL JWT
-server.get("/jwt", (req, res) => {
-
-	const Payload = {
-
-		"userName": "Admin",
-		"iat": new Date(),
-		"role": "Admin",
-		"ip": req.ip
-	};
-	const JWT = generateJWT(Payload);
-	res.cookie("jwt", JWT, {"httpOnly": true});
-	res.send("Hola Mundo");
-});
 
 
 //FUNCIONES PARA CODIFICACION JWT  =====>> TODO ESTO VA EN FRONTEND

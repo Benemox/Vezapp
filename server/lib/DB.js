@@ -3,7 +3,6 @@ const HOST_SQL = process.env.HOST_SQL;
 const USER_SQL = process.env.USER_SQL;
 const PASSWORD_SQL = process.env.PASSWORD_SQL;
 const DATABASE_SQL = process.env.DATABASE_SQL;
-const MongoClient = require("mongodb").MongoClient;
 const sql = require("mysql");
 
 
@@ -38,4 +37,5 @@ function SQLquery(string, options = {}) {
 }
 
 
-module.exports =SQLquery,connection,MongoClient
+module.exports = SQLquery
+
