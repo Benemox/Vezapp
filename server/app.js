@@ -1,13 +1,4 @@
 
-///////////////////////Start Server/////////////////////
-// const express = require("express");
-// const server = express();
-// const myPublicFiles = express.static("../public");	
-// const bodyParser = require("body-parser");
-// const cors = require("cors");
-//  const cookieParser = require("cookie-parser");
- // const listenPort = 7777;
-
 ///encrypt to future modules
 const base64 = require("base-64");
 const crypto = require("crypto");
@@ -47,13 +38,25 @@ server.get("/jwt", (req, res) => {
 
 /*                                                USER Querys                                                            */
 
-// PIDE:
-// -Rango = let range
-// -Favoritos = let favBeer
-// /editprofile (button)
-// (avatar pendiente)///foto perfil
 
-// (Ultimos logros creo.....)
+///////////////////////////////////////////////////////Profile///////////////////////////////////////////////////////////////////7777
+server.get("/Profile",'/form', [
+	check('name').isLength({ min: 3 }),	
+	check('email').isEmail(),
+	check('age').isNumeric()
+  ], (req, res) => {
+	const name  = req.body.name
+	const email = req.body.email
+	const age   = req.body.age
+	let {iduser} = req.body;
+	SQLquery("SELECT * FROM User WHERE iduser = ?", [iduser])
+	.then(result =>res.send(result))
+  }) 
+
+
+
+
+///////////////////////////////////////////////////Edit Profile////////////////////////////
 
 
 
@@ -61,6 +64,48 @@ server.get("/jwt", (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////favorites beer//////////////////////////////////////////////////////////////
+server.get("/favoritesBeer", async (req, res)=>{
+	let {iduser} = req.body;
+	SQLquery("SELECT * FROM Beers LEFT JOIN favUser ON beers.idbeer = favUser.idBeer WHERE iduser = ?", [iduser])
+		.then(result =>res.send(result))
+		.catch(err =>{
+			console.log(err);
+			res.send(err);
+		})
+});
+                                ///////////////////////////////////deleteFAv//////////////////////////////////
+server.get("/deletefav", async (req, res)=>{
+	let {idfav} = req.body;
+	SQLquery("DELETE FROM favuser WHERE idfav = ? ", [idfav])
+		.then(result =>res.send(result));
+});
+
+                                 //////////////////////////////////////addFav////////////////////////////////
+server.get("/addfav", async (req, res)=>{
+	let {idBeer,iduser} = req.body;
+		SQLquery("INSERT INTO favuser (iduser,idBeer) VALUES (?, ?)", [idBeer,iduser])
+			.then(result => res.send(result))
+			.catch(err => res.send(err));
+});
 
 
 
