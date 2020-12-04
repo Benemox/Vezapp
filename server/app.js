@@ -40,18 +40,18 @@ server.get("/jwt", (req, res) => {
 
 
 ///////////////////////////////////////////////////////Profile///////////////////////////////////////////////////////////////////7777
-server.get("/Profile",'/form', [
-	check('name').isLength({ min: 3 }),	
-	check('email').isEmail(),
-	check('age').isNumeric()
-  ], (req, res) => {
-	const name  = req.body.name
-	const email = req.body.email
-	const age   = req.body.age
-	let {iduser} = req.body;
-	SQLquery("SELECT * FROM User WHERE iduser = ?", [iduser])
-	.then(result =>res.send(result))
-  }) 
+// server.get("/Profile",'/form', [
+// 	check('name').isLength({ min: 3 }),	
+// 	check('email').isEmail(),
+// 	check('age').isNumeric()
+//   ], (req, res) => {
+// 	const name  = req.body.name
+// 	const email = req.body.email
+// 	const age   = req.body.age
+// 	let {iduser} = req.body;
+// 	SQLquery("SELECT * FROM User WHERE iduser = ?", [iduser])
+// 	.then(result =>res.send(result))
+//   }) 
 
 
 
