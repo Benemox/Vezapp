@@ -22,27 +22,10 @@ const SECRET_JWT = process.env.SECRET_JWT;
 
 const SQLquery = require("./lib/DB")
 const {encryptPassword,getJWTInfo,verifyJWT,generateJWT} = require("./lib/JWT");
-//const {server} = require("./server")
+const server = require("./server")
+const listenPort = 7777;
 
-///////////////////////Start Server/////////////////////
-
-const express = require("express");
-const server = express();
-const myPublicFiles = express.static("../public");	
-const bodyParser = require("body-parser");
-const cors = require("cors");
- const cookieParser = require("cookie-parser");
- const listenPort = 7777;
-
- /////////////////////////////////////////////////////Server Conection//////////////////////////////////////////////////
-
-   server.use(myPublicFiles);
-   server.use(bodyParser.urlencoded({"extended":false}));
-   server.use(bodyParser.json());
-   server.use(cors());
-
-
-/////////////////////////////////////////////////////Server Conection//////////////////////////////////////////////////
+/////////////////////////////////////////////////////Server jwt Conection//////////////////////////////////////////////////
 server.get("/jwt", (req, res) => {
 
 	const Payload = {
@@ -61,6 +44,34 @@ server.get("/jwt", (req, res) => {
 ////////////////////////////////////////////////////////Querys//////////////////////////////////////////////////////////////
 
 
+
+/*                                                USER Querys                                                            */
+
+// PIDE:
+// -Rango = let range
+// -Favoritos = let favBeer
+// /editprofile (button)
+// (avatar pendiente)///foto perfil
+
+// (Ultimos logros creo.....)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*                                                 Beer Querys                                                                   */
 
 //////////////////////////////////////////////////////GetSpecificBeer//////////////////////////////////////////////////////
 
@@ -108,7 +119,18 @@ server.get("/FeelBeer", async (req, resp)=>{
 		});
 			
 })
-    
+/////////////////////////////////////////////////////Search////////////////////////////////////////////////////  
+
+server.get("/Search", async (req, res)=>{
+	let {Term} = req.body;
+	console.log(Term)
+	SQLquery("SELECT * FROM Beers WHERE type = ? OR name = ? OR FerType =? OR vol = ? OR  alc = ? OR country = ? OR color = ?", [Term,Term,Term,Term,Term,Term,Term])
+		.then(result =>res.send(result))
+		.catch(err => res.send(err))
+});
+
+
+
 
 
 server.listen(listenPort, () => {
