@@ -40,18 +40,18 @@ server.get("/jwt", (req, res) => {
 
 
 ///////////////////////////////////////////////////////Profile///////////////////////////////////////////////////////////////////7777
-// server.get("/Profile",'/form', [
-// 	check('name').isLength({ min: 3 }),	
-// 	check('email').isEmail(),
-// 	check('age').isNumeric()
-//   ], (req, res) => {
-// 	const name  = req.body.name
-// 	const email = req.body.email
-// 	const age   = req.body.age
-// 	let {iduser} = req.body;
-// 	SQLquery("SELECT * FROM User WHERE iduser = ?", [iduser])
-// 	.then(result =>res.send(result))
-//   }) 
+	// server.get("/Profile",'/form', [
+	// 	check('name').isLength({ min: 3 }),	
+	// 	check('email').isEmail(),
+	// 	check('age').isNumeric()
+	//   ], (req, res) => {
+	// 	const name  = req.body.name
+	// 	const email = req.body.email
+	// 	const age   = req.body.age
+	// 	let {iduser} = req.body;
+	// 	SQLquery("SELECT * FROM User WHERE iduser = ?", [iduser])
+	// 	.then(result =>res.send(result))
+	//   }) 
 
 
 
@@ -84,7 +84,7 @@ server.get("/jwt", (req, res) => {
 
 //////////////////////////////////////////////////////favorites beer//////////////////////////////////////////////////////////////
 server.get("/favoritesBeer", async (req, res)=>{
-	let {iduser} = req.body;
+	let {iduser} = req.query;
 	SQLquery("SELECT * FROM Beers LEFT JOIN favUser ON beers.idbeer = favUser.idBeer WHERE iduser = ?", [iduser])
 		.then(result =>res.send(result))
 		.catch(err =>{
@@ -94,14 +94,14 @@ server.get("/favoritesBeer", async (req, res)=>{
 });
                                 ///////////////////////////////////deleteFAv//////////////////////////////////
 server.get("/deletefav", async (req, res)=>{
-	let {idfav} = req.body;
+	let {idfav} = req.query;
 	SQLquery("DELETE FROM favuser WHERE idfav = ? ", [idfav])
 		.then(result =>res.send(result));
 });
 
                                  //////////////////////////////////////addFav////////////////////////////////
 server.get("/addfav", async (req, res)=>{
-	let {idBeer,iduser} = req.body;
+	let {idBeer,iduser} = req.query;
 		SQLquery("INSERT INTO favuser (iduser,idBeer) VALUES (?, ?)", [idBeer,iduser])
 			.then(result => res.send(result))
 			.catch(err => res.send(err));
@@ -122,7 +122,7 @@ server.get("/addfav", async (req, res)=>{
 
 /// ya añadiremos mas tarde si es preciso que solo envie ciertos datos especificos por ahora asi esta bien
 server.get("/Beer", async (req, res)=>{
-	let {idBeer} = req.body;
+	let {idBeer} = req.query;
 	SQLquery("SELECT * FROM Beers WHERE idBeer = ?", [idBeer])
 		.then(result =>res.send(result));
 });
@@ -131,7 +131,7 @@ server.get("/Beer", async (req, res)=>{
 //////////////////////////////////////////////////FeelBeer////////////////////////////////////////////////////////////////////
 
 server.get("/FeelBeer", async (req, resp)=>{
-	let {FEEL} = req.body;
+	let {FEEL} = req.query;
 	SQLquery("SELECT idfav FROM BeerFeelUser WHERE idFeel = ?", [FEEL])
     .then(
         (result)=>{
@@ -167,7 +167,7 @@ server.get("/FeelBeer", async (req, resp)=>{
 /////////////////////////////////////////////////////Search////////////////////////////////////////////////////  
 
 server.get("/Search", async (req, res)=>{
-	let {Term} = req.body;
+	let {Term} = req.query;
 	console.log(Term)
 	SQLquery("SELECT * FROM Beers WHERE type = ? OR name = ? OR FerType =? OR vol = ? OR  alc = ? OR country = ? OR color = ?", [Term,Term,Term,Term,Term,Term,Term])
 		.then(result =>res.send(result))
