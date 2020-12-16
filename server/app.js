@@ -40,18 +40,23 @@ server.get("/jwt", (req, res) => {
 
 
 ///////////////////////////////////////////////////////Profile///////////////////////////////////////////////////////////////////7777
-	// server.get("/Profile",'/form', [
-	// 	check('name').isLength({ min: 3 }),	
-	// 	check('email').isEmail(),
-	// 	check('age').isNumeric()
-	//   ], (req, res) => {
-	// 	const name  = req.body.name
-	// 	const email = req.body.email
-	// 	const age   = req.body.age
-	// 	let {iduser} = req.body;
-	// 	SQLquery("SELECT * FROM User WHERE iduser = ?", [iduser])
-	// 	.then(result =>res.send(result))
-	//   }) 
+	 server.post("/register",async (req,res)=>{
+		const data = req.body
+		console.log(data)
+		// const Payload = {
+
+		// 	"userName": data.user,
+		// 	"iat": new Date(),
+		// 	"role": data.user,
+		// 	"ip": req.ip
+		// };
+		// const JWT = await generateJWT(Payload);
+		// res.cookie("jwt", JWT, {"httpOnly": true});
+		res.send({"gracias": "ha sido guardado"})
+		res.redirect("http://localhost:3000/dasboard")
+		
+
+	 })
 
 
 
@@ -59,27 +64,19 @@ server.get("/jwt", (req, res) => {
 ///////////////////////////////////////////////////Edit Profile////////////////////////////
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+server.get("/editProfile", async (req, res)=>{
+	//let {term} = req.body;
+	let data = [req.body]
+	console.log(data)
+	data.map(el=>Object.values(el).map(e=>{console.log(Object.keys(e)[0])
+		SQLquery(`UPDATE user SET ${Object.keys(e)[0]} = ? WHERE ${Object.keys(e)[1]}= ?`, [Object.values(e)[0],Object.values(e)[1]])
+			.then(result =>res.send(result))
+			.catch(err =>{
+				console.log(err);
+				res.send(err);
+			})
+	}))
+})
 
 
 //////////////////////////////////////////////////////favorites beer//////////////////////////////////////////////////////////////
