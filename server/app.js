@@ -52,9 +52,9 @@ server.get("/jwt", (req, res) => {
 		// };
 		// const JWT = await generateJWT(Payload);
 		// res.cookie("jwt", JWT, {"httpOnly": true});
-		res.send({"gracias": "ha sido guardado"})
-		res.redirect("http://localhost:3000/dasboard")
 		
+		res.redirect("/dasboard")
+		res.send({"gracias": "ha sido guardado"})
 
 	 })
 
@@ -64,8 +64,7 @@ server.get("/jwt", (req, res) => {
 ///////////////////////////////////////////////////Edit Profile////////////////////////////
 
 
-server.get("/editProfile", async (req, res)=>{
-	//let {term} = req.body;
+server.put("/editProfile", async (req, res)=>{
 	let data = [req.body]
 	console.log(data)
 	data.map(el=>Object.values(el).map(e=>{console.log(Object.keys(e)[0])
