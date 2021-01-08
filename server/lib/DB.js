@@ -13,7 +13,7 @@ let connection = sql.createConnection({
 
 	"host"     : HOST_SQL,
 	"user"     : USER_SQL,
-	"password" : PASSWORD_SQL, //ESTO PUEDE DAR NULL Y LLEVAR A PROBLEMAS MAS TARDE
+	"password" : PASSWORD_SQL,
 	"database" : DATABASE_SQL
 });
 

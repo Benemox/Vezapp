@@ -1,6 +1,7 @@
 
 ///encrypt to future modules
 const base64 = require("base-64");
+const { Console } = require("console");
 const crypto = require("crypto");
 const fetch = require("node-fetch");
 require("dotenv").config();
@@ -14,26 +15,29 @@ const SECRET_JWT = process.env.SECRET_JWT;
 const SQLquery = require("./lib/DB")
 const {encryptPassword,getJWTInfo,verifyJWT,generateJWT} = require("./lib/JWT");
 const server = require("./server")
-const listenPort = 7777;
+const listenPort = 8080;
 
-/////////////////////////////////////////////////////Server jwt Conection//////////////////////////////////////////////////
-server.get("/jwt", (req, res) => {
+// /////////////////////////////////////////////////////Server jwt Conection//////////////////////////////////////////////////
+// server.get("/jwt", (req, res) => {
 
-	const Payload = {
+// 	const Payload = {
 
-		"userName": "Admin",
-		"iat": new Date(),
-		"role": "Admin",
-		"ip": req.ip
-	};
-	const JWT = generateJWT(Payload);
-	res.cookie("jwt", JWT, {"httpOnly": true});
-	res.send("Hola Mundo");
-});
+// 		"userName": "Admin",
+// 		"iat": new Date(),
+// 		"role": "Admin",
+// 		"ip": req.ip
+// 	};
+// 	const JWT = generateJWT(Payload);
+// 	res.cookie("jwt", JWT, {"httpOnly": true});
+// 	res.send("Hola Mundo");
+// });
 
 
 ////////////////////////////////////////////////////////Querys//////////////////////////////////////////////////////////////
 
+
+
+//////////////////////////////////////////Login////////////////////////////////////777777
 
 
 /*                                                USER Querys                                                            */
@@ -119,7 +123,7 @@ server.get("/addfav", async (req, res)=>{
 /// ya añadiremos mas tarde si es preciso que solo envie ciertos datos especificos por ahora asi esta bien
 server.get("/Beer", async (req, res)=>{
 	let {idBeer} = req.query;
-	SQLquery("SELECT * FROM Beers WHERE idBeer = ?", [idBeer])
+	SQLquery("SELECT * FROM cervezas "/*WHERE idBeer = ?", [idBeer]*/)
 		.then(result =>res.send(result));
 });
 

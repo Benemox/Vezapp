@@ -14,8 +14,6 @@ const cors = require("cors");
    server.use(bodyParser.urlencoded({"extended":false}));
    server.use(bodyParser.json());
    server.use(cors());
-   // server.listen(listenPort, () => {
-   //    console.log(`${string} ${listenPort}`);
-   //     });
+
 
     module.exports = server
