@@ -8,11 +8,16 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const GH_SECRET = process.env.GH_SECRET;
 
 const SECRET_JWT = process.env.SECRET_JWT;
-
+const SALT  = process.env.SALT 
 
 
 //COMPROBACIÓN DEL JWT
+function parsejwt(token){
+	let base64url =token.split('.')[1];
+	let base64 = base64url.replace('-','+').replace('_','/');
+	return JSON.parse(window.atob(base64))
 
+}
 
 //FUNCIONES PARA CODIFICACION JWT  =====>> TODO ESTO VA EN FRONTEND
 
@@ -44,7 +49,7 @@ function generateJWT(Payload) {
 
 function hash(string) {
 	const hashedString = crypto
-		.createHmac("sha256", SECRET)
+		.createHmac("sha256", SECRET_JWT)
 		.update(string)
 		.digest("base64");
 	return hashedString;
@@ -76,9 +81,8 @@ function getJWTInfo(jwt) {
 // FUNCIONES DE ENCRIPTACION DE CONTRASEÑA
 
 function encryptPassword(string) {
-	const salt = "";
-	let saltedPassword = salt + string + salt;
-
+	let saltedPassword = SALT  + string + SALT
+	return saltedPassword
 }
 
 module.exports = encryptPassword,getJWTInfo,verifyJWT,generateJWT
