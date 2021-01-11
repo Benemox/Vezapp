@@ -59,11 +59,11 @@ server.get("/Beer",  async (req, res)=>{
 
 ///////////////////////////////////////////////////SCANBEEER////////////////////////////////////////////////77
 server.get("/ImgoingTohaveLuck/:ean", async (req, res)=>{
-    console.log(req.param)
+
+    console.log(req.params.ean)
 	 let ean = req.params.ean;
 	await SQLquery("SELECT * FROM cervezas WHERE EAN = ?", [ean])
  	.then(result =>res.send(result));
-    res.send("hola")
 });
 
 module.exports = server;

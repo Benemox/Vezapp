@@ -90,23 +90,34 @@ server.post("/User",oauthJwt,async (req,res)=>{
 server.post("/regUser",async (req,res)=>{
     let body = req.body
     let duplicate = await SQLquery(`SELECT * FROM USERs WHERE email = ?`,[req.body.email])  
-   
-    if(duplicate.length <= 0){
+    
+    if(duplicate.length< 0){
     
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(body.pwd, salt,async function(err, hash) {
            if(hash){
             await SQLquery('INSERT INTO USERs (email, pwd, name)VALUES (?, ?,?)',[body.email,hash, body.name])
-            res.json("done")
+            let token = jwt.sign({user:duplicate[0]},secret,{ expiresIn: EXPIRE_TOKEN} )
+            return res.json({
+                ok:true,
+                usuario:{
+                    IDUSER:await SQLquery(`SELECT IDUSER FROM USERs WHERE email = ?`,[body.email])[0] ,
+                    email: body.email,
+                    name: body.name
+                } ,
+                token
+            })
            }else{
                console.log(body.pwd)
-               res.json(err +"   no Salteado")
+             return  res.json(err +"   no Salteado")
            }
         })
     });
      }
-
-   
+     res.json({
+        ok:false,
+        message: "El email ya se encuentra dentro de nuestra base de datos"
+     })
 })
 
 
