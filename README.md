@@ -1,27 +1,27 @@
 # Vezapp 🍺
 
-**Vezapp** es una aplicación web orientada a explorar, compartir y disfrutar del mundo cervecero. Diseñada con pasión por la programación y como parte de un portafolio personal, esta herramienta permite gestionar experiencias, aprender sobre cervezas y fomentar la comunidad.
+**Vezapp** is a web application designed to explore, share, and enjoy the world of beer. Built with passion for programming and as part of a personal portfolio, this tool allows users to manage experiences, learn about beers, and foster a community.
 
-## 🧠 ¿Por qué este proyecto?
+## 🧠 Why This Project?
 
-Este proyecto fue desarrollado como una pieza técnica para demostrar mis habilidades en desarrollo web, integración de tecnologías frontend y backend, y buenas prácticas de desarrollo. No es un producto final para producción, sino una muestra técnica de lo que soy capaz de construir.
+This project was developed as a technical showcase to demonstrate my skills in web development, integration of frontend and backend technologies, and software engineering best practices. It is not a production-ready product, but a technical piece to highlight my capabilities.
 
-## 🚀 Características
+## 🚀 Features
 
-- Listado y exploración de tipos de cerveza.
-- Creación y gestión de usuarios.
-- Posibilidad de valorar y comentar sobre cervezas.
-- Backend sencillo para gestionar los recursos.
-- Arquitectura clara y modular.
+- Browse and explore different types of beer.
+- Create and manage user accounts.
+- Rate and comment on beers.
+- Simple backend for resource management.
+- Clear and modular architecture.
 
-## 🛠 Tecnologías
+## 🛠 Technologies
 
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** Node.js
-- **Base de datos:** MongoDb
-- **Control de versiones:** Git + GitHub
+- **Database:** MongoDB
+- **Version Control:** Git + GitHub
 
-## 🧱 Estructura del Proyecto
+## 🧱 Project Structure
 
 Vezapp/
 ├── public/ # Archivos estáticos
@@ -29,15 +29,15 @@ Vezapp/
 ├── package.json # Dependencias y scripts
 └── README.md # Documentación del proyecto
 
-## 🧪 Cómo ejecutar localmente
+## 🧪 How to Run Locally
 
 ```bash
-# 1. Clona el repositorio
+# 1. Clone the repository
 git clone https://github.com/Benemox/Vezapp.git
 cd Vezapp
 
-# 2. Instala las dependencias
+# 2. Install dependencies
 npm install
 
-# 3. Inicia el servidor
+# 3. Start the server
 npm start
